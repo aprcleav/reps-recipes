@@ -1,0 +1,133 @@
+/* Color Scheme */
+:root {
+    --primary-color: #2c363f;
+    --secondary-color: #2f97c1;
+    --accent-color: #F18f01;
+    --accent2-color: #F0eff4;
+}
+
+/* Universal styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    font-family: 'Montserrat', Arial, sans-serif;
+    color: var(--primary-color);
+    background-color: var(--accent2-color);
+}
+
+/* Header styles */
+header {
+    font-size: .8rem;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--primary-color);
+    border-bottom: solid 4px var(--accent-color);
+    color: var(--accent2-color);
+    & img {
+            width: 70px;
+            height: 100%;
+        }
+    & a {
+        text-decoration: none;
+        color: var(--accent2-color);
+    }
+
+}
+
+/* Hamburger navigation */
+.hamburger {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.hamburger::before {
+    content: "\2630";
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--accent2-color);
+}
+
+.hamburger.show::before {
+    content: "X";
+    font-weight: 600;
+    font-size: 2rem;
+    color: var(--accent2-color);
+}
+
+/* Navigation */
+.navigation {
+    display: none;
+}
+
+.navigation.show {
+    display: block;
+    margin: auto;
+}
+
+.navigation
+/* End header styles */
+
+/* Search box styles */
+#search-box {
+    display: grid;
+    place-items: center;
+    padding: 20px;
+}
+
+.search {
+    display: grid;
+    grid-gap: .3rem;
+    grid-template-columns: 30px 1fr 20px 1fr;
+    place-items: center;
+    
+    border: solid 2px var(--secondary-color);
+    
+    & input[type="search"] {
+        margin: 5px;
+        width: 150px;
+        font-family: "Montserrat", Arial, sans-serif;
+        padding: 5px;
+    }
+
+}
+.random {
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    width: 100%;
+    margin: 10px;
+}
+
+button {
+    background-color: var(--primary-color);
+    color: var(--accent2-color);
+    border: none;
+    padding: 10px;
+    margin: 10px;
+    font-family: "Montserrat", Arial, sans-serif;
+}
+
+/* Footer styles */
+footer {
+    background-color: var(--primary-color);
+    color: var(--accent2-color);
+    padding: 20px;
+    text-align: center;
+    & a {
+        text-decoration: none;
+        color: var(--accent2-color);
+    }
+    & a:hover {
+        color: #ebd2ac;
+    }
+}
+
