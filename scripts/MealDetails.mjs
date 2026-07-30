@@ -64,11 +64,6 @@ export default class MealDetails {
     getRandomMeal() {
         const url = 'https://themealdb.p.rapidapi.com/random.php';
         this.getData(url);
-
-        const randomButton = document.querySelector(".random");
-        randomButton.addEventListener("click", () => {
-            return this.randomMealTemplate()
-        })
         
     }
 }

@@ -28,7 +28,9 @@ function randomMealTemplate(meal) {
 // I need to write a function that displays the meal data as a card.
 
 const meal = new MealDetails();
-
-const randomMeal = meal.getRandomMeal();
-randomMealTemplate(randomMeal);
+const randomButton = document.querySelector(".random");
+randomButton.addEventListener("click", () => {
+    const randomMeal = meal.getRandomMeal();
+    randomMealTemplate(randomMeal);
+});
 
