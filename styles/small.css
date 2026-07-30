@@ -18,9 +18,15 @@ body {
     background-color: var(--accent2-color);
 }
 
+h2, h3, p {
+    padding: 0 10px;
+    margin: 10px;
+}
+
 /* Header styles */
 header {
     font-size: .8rem;
+    height: 100px;
     padding: 10px;
     display: flex;
     align-items: center;
@@ -28,6 +34,7 @@ header {
     background-color: var(--primary-color);
     border-bottom: solid 4px var(--accent-color);
     color: var(--accent2-color);
+    text-transform:uppercase;
     & img {
             width: 70px;
             height: 100%;
@@ -40,6 +47,25 @@ header {
 }
 
 /* Hamburger navigation */
+@keyframes slideDown {
+    from {
+        height: 0px;
+    }
+
+    to {
+        height: 100px;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        height: 100px;
+    }
+    to {
+        height: 0px;
+    }
+}
+
 .hamburger {
     background: none;
     border: none;
@@ -56,22 +82,53 @@ header {
 .hamburger.show::before {
     content: "X";
     font-weight: 600;
-    font-size: 2rem;
+    font-size: 1.9rem;
     color: var(--accent2-color);
 }
 
 /* Navigation */
 .navigation {
     display: none;
+    margin: auto;
+    font-weight: 600;
+    text-align: center;
+    animation: slideDown .3s ease-in-out;
+    padding: 10px;
+    border-bottom: 4px solid var(--secondary-color);
+    box-shadow: 0px 8px 5px -5px rgba(0, 0, 0, 0.3);
+
+    & a {
+        text-decoration: none;
+        color: var(--primary-color);
+    }
+
+    & a:hover {
+        color: #8b580b;
+    }
+
+    & li {
+        list-style: none;
+        padding: 2px;
+    }
+
+    & ul {
+        padding: 0;
+    }
+}
+
+.active {
+    background-color:#ebd2ac;
 }
 
 .navigation.show {
     display: block;
-    margin: auto;
 }
-
-.navigation
 /* End header styles */
+
+/* Main styles */
+main {
+    padding: 10px;
+}
 
 /* Search box styles */
 #search-box {
@@ -83,10 +140,8 @@ header {
 .search {
     display: grid;
     grid-gap: .3rem;
-    grid-template-columns: 30px 1fr 20px 1fr;
+    grid-template-columns: 30px 1fr 20px;
     place-items: center;
-    
-    border: solid 2px var(--secondary-color);
     
     & input[type="search"] {
         margin: 5px;
@@ -98,8 +153,8 @@ header {
 }
 .random {
     text-align: center;
-    display: flex;
-    align-items: center;
+    grid-column: 2/3;
+    
 }
 
 .icon {
@@ -111,9 +166,18 @@ button {
     background-color: var(--primary-color);
     color: var(--accent2-color);
     border: none;
-    padding: 10px;
+    padding: 15px;
     margin: 10px;
+    font-weight: 600;
+    border-radius: 10px;
     font-family: "Montserrat", Arial, sans-serif;
+
+    transition: background-color .3s ease;
+}
+
+button:hover {
+    background-color:#abd4e6;
+    color: var(--primary-color);
 }
 
 /* Footer styles */

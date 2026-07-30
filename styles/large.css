@@ -1,0 +1,37 @@
+@media only screen and (min-width: 600px) {
+    header {
+        justify-content: center;
+        & img {
+            margin-right: 10px;
+        }
+
+    }
+    
+    .hamburger {
+        display: none;
+    }
+
+    .navigation {
+        display: block;
+        animation: none;
+    }
+
+    .navigation ul {
+        display: flex;
+        justify-content: center;
+        & li a {
+            padding: 15px;
+        }
+    }
+
+    .search {
+        grid-template-columns: 30px 1fr 1fr;
+    }
+
+    .random {
+        display: flex;
+        align-items: center;
+        grid-column: 3/4;
+    }
+}
+
