@@ -1,4 +1,3 @@
-
 export function renderWithTemplate(template, parentElement) {
     parentElement.innerHTML = template;
 }
@@ -58,21 +57,4 @@ export function setLocalStorage(key, data) {
     localStorage.setItem(key, JSON.stringify(data));
 }
 
-// Get user input from search bar
-export function getKeyword() {
-    const keyword = document.getElementById("search").value;
-    return keyword;
-}
 
-// Display search results
-
-
-export function displaySearchResults() {
-    const searchButton = document.querySelector(".search-icon");
-    searchButton.addEventListener("click", () => {
-        const keyword = getKeyword();
-        return searchResultsTemplate(keyword);
-    })
-}
-
-// 
