@@ -57,19 +57,22 @@ header {
     }
 }
 
-@keyframes slideUp {
+/* @keyframes slideUp {
     from {
         height: 100px;
     }
     to {
         height: 0px;
     }
-}
+} */
 
 .hamburger {
     background: none;
     border: none;
     cursor: pointer;
+}
+.hamburger:hover {
+    background-color: var(--primary-color);
 }
 
 .hamburger::before {
@@ -92,7 +95,7 @@ header {
     margin: auto;
     font-weight: 600;
     text-align: center;
-    animation: slideDown .3s ease-in-out;
+    animation: slideDown .3s ease-out;
     padding: 10px;
     border-bottom: 4px solid var(--secondary-color);
     box-shadow: 0px 8px 5px -5px rgba(0, 0, 0, 0.3);
@@ -128,6 +131,8 @@ header {
 /* Main styles */
 main {
     padding: 10px;
+    max-width: 900px;
+    margin: auto;
 }
 
 /* Search box styles */
@@ -135,6 +140,9 @@ main {
     display: grid;
     place-items: center;
     padding: 20px;
+    & p {
+        text-align: center;
+    }
 }
 
 .search {
@@ -166,7 +174,7 @@ main {
     cursor: pointer;
 }
 
-button {
+button, .button {
     background-color: var(--primary-color);
     color: var(--accent2-color);
     border: none;
@@ -180,9 +188,97 @@ button {
     transition: background-color .3s ease;
 }
 
-button:hover {
+button:hover, .button:hover {
     background-color:#abd4e6;
     color: var(--primary-color);
+}
+
+/* Meal card styles */
+#meal-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 1rem;
+    place-items: center;
+}
+
+.card {
+    margin: 10px;
+    box-shadow: 0px 2px 5px#2c363f88;
+    width: 300px;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: var(--accent2-color);
+    & h2 {
+        text-transform: capitalize;
+    }
+    
+}
+
+.img-container {
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 10px 10px 0 0;
+    & img {
+        width: 100%;
+        height: 100%;
+        object-fit:cover;
+        transition: transform 0.3s ease;
+    }
+}
+
+.img-container:hover img {
+    transform: scale(1.10);
+}
+
+::backdrop {
+    background-color:#2c363f7a;
+}
+
+#meal-details {
+    width: 85%;
+    margin: auto;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--accent2-color);
+    color: var(--primary-color);
+    & img {
+        width: 100%;
+    }
+}
+/* Index page styles */
+.welcome {
+    text-align: center;
+    margin: 30px;
+    & p {
+        padding: 5px;
+    }
+    & img {
+        max-width: 100%;
+    }
+}
+.button {
+    text-decoration: none;
+    justify-content: center;
+}
+
+.button-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center;
+}
+/* Attribution page styles */
+.att {
+    font-weight: 600;
+    & li a {
+        list-style:disc;
+    }
+}
+
+/* Favorites page styles */
+.no-favs {
+    text-align: center;
 }
 
 /* Footer styles */

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="styles/small.css">
     <link rel="stylesheet" href="styles/large.css">
     <script src="scripts/main.js" type="module"></script>
+    <script src="scripts/exercises.js" type="module"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
@@ -21,6 +22,7 @@
     <header id="main-header"></header>
     <main>
         <section id="search-box">
+            <p>Search with a keyword, or generate a random exercise.</p>
             <div class="search">
                 <img src="images/dumbbell.png" class="icon" alt="exercise icon">
                 <div class="search-bar">
@@ -33,7 +35,10 @@
                 </div>
             </div>
         </section>
-        <section id="exercise-cards"></section>
+        <section id="exercise-cards">
+            <!-- Add image here -->
+        </section>
+        <dialog id="exercise-details"></dialog>
     </main>
     <footer id="main-footer"></footer>
 </body>

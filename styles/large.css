@@ -33,5 +33,16 @@
         align-items: center;
         grid-column: 3/4;
     }
+
+    #meal-details {
+        width: 85%;
+        margin: auto;
+        border: none;
+        border-radius: 10px;
+
+        & img {
+            width: 50%;
+        }
+    }
 }
 

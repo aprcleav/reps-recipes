@@ -1,0 +1,97 @@
+export default class ExerciseData {
+    constructor() {
+
+    }
+    // Store API options data
+    getOptions() {
+        const options = {
+            method: 'GET',
+            headers: {
+                'x-rapidapi-key': '6797faa94emshf02bb3d46934713p1aff6fjsn8a6b4028de73',
+                'x-rapidapi-host': 'edb-with-videos-and-images-by-ascendapi.p.rapidapi.com',
+                'Content-Type': 'application/json'
+            }
+        }
+        return options;
+    }
+
+    // Returns API promise
+    async getData(url) {
+        const options = this.getOptions();
+
+        try {
+            const response = await fetch(url, options);
+            const result = await response.json();
+            console.log(result);
+            return result;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    getExerciseData(keyword) {
+        const url = `https://edb-with-videos-and-images-by-ascendapi.p.rapidapi.com/api/v1/exercises/search?search=${keyword}`;
+        return this.getData(url);
+    }
+
+    getExerciseById(exerciseId) {
+        const url = `https://edb-with-videos-and-images-by-ascendapi.p.rapidapi.com/api/v1/exercises/${exerciseId}`;
+        return this.getData(url);
+    }
+
+    // Display single meals in a modal that can be closed with a button
+    // Need to figure out how to get this to display the individual meal data
+    exerciseTemplate(exercise) {
+        console.log('Exercise data received:', exercise);
+
+        const exerciseDetails = document.querySelector("#exercise-details");
+        exerciseDetails.innerHTML = `
+        <img src="${exercise.imageUrl}" alt="${exercise.name}">
+        <h2>${exercise.name.toUpperCase()}</h2>
+        <h3>Overview</h3>
+            <p>${exercise.overview}</p>
+        <h3>Instructions</h3>
+            <p>${exercise.instructions}</p>
+            <a href="${exercise.videoUrl}">Video Link</a>
+        `;
+
+        exerciseDetails.showModal();
+
+        const closeModal = exerciseDetails.querySelector("#close-modal");
+        closeModal.addEventListener("click", () => {
+            exerciseDetails.close();
+        });
+    }
+
+    // Displays exercises (from search results) as cards
+    displayExercises(exercises) {
+        const exerciseCards = document.querySelector("#exercise-cards");
+        exerciseCards.innerHTML = "";
+        exercises.forEach((exercise) => {
+            let card = document.createElement("div");
+            let imgContainer = document.createElement("div");
+            let img = document.createElement("img");
+            let name = document.createElement("h2");
+
+            card.setAttribute("class", "card");
+            name.textContent = exercise.name;
+            imgContainer.setAttribute("class", "img-container");
+            img.setAttribute("src", exercise.imageUrl);
+            img.setAttribute("alt", exercise.name);
+            img.setAttribute("loading", "lazy");
+
+            card.appendChild(imgContainer);
+            imgContainer.appendChild(img);
+            card.appendChild(name);
+
+            // Displays modal with exercise details when card is clicked
+            card.addEventListener("click", () => {
+                const currentExercise = this.getExerciseById(exercise.exerciseId);
+                this.exerciseTemplate(currentExercise);
+            });
+
+            exerciseCards.appendChild(card);
+        })
+    }
+    
+    }

@@ -48,6 +48,33 @@ export async function loadHeaderFooter() {
     document.getElementById("last-modified").innerHTML = document.lastModified;
 }
 
+// Return API options data
+export function getOptions(host) {
+    const options = {
+        method: 'GET',
+        headers: {
+            'x-rapidapi-key': '6797faa94emshf02bb3d46934713p1aff6fjsn8a6b4028de73',
+            'x-rapidapi-host': host,
+            'Content-Type': 'application/json'
+        }
+    }
+    return options;
+}
+
+// Returns API promise
+export async function getData(url, host) {
+    const options = this.getOptions(host);
+
+    try {
+        const response = await fetch(url, options);
+        const result = await response.json();
+        console.log(result);
+        return result;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 // Get and set localStorage for saving favorites
 export function getLocalStorage(key) {
     return JSON.parse(localStorage.getItem(key));
