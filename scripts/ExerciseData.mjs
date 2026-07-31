@@ -86,8 +86,7 @@ export default class ExerciseData {
 
             // Displays modal with exercise details when card is clicked
             card.addEventListener("click", () => {
-                const currentExercise = this.getExerciseById(exercise.exerciseId);
-                this.exerciseTemplate(currentExercise);
+                this.exerciseTemplate(exercise);
             });
 
             exerciseCards.appendChild(card);
