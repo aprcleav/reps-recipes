@@ -53,6 +53,8 @@ export default class ExerciseData {
         <h3>Instructions</h3>
             <p>${exercise.instructions}</p>
             <a href="${exercise.videoUrl}">Video Link</a>
+        <button id="close-modal" type="button">Close</button>
+        <button id="add-fav" type="button">Add Favorite</button>
         `;
 
         exerciseDetails.showModal();
