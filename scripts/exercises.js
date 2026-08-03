@@ -2,6 +2,14 @@ import ExerciseData from "./ExerciseData.mjs";
 
 const exercises = new ExerciseData();
 
+// Display random exercise when "get random" button is clicked
+const randomButton = document.querySelector(".random");
+randomButton.addEventListener("click", async () => {
+    const randomExercise = await exercises.getRandomExercise();
+    const randomExerciseData = await exercises.getExerciseById(randomExercise.exerciseId)
+    exercises.exerciseTemplate(randomExerciseData.data);
+});
+
 // Get user input from the search bar & display search results
 const searchButton = document.querySelector(".search-icon");
 const searchBar = document.querySelector("#search");

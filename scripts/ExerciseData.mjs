@@ -1,10 +1,8 @@
+import { getData } from "./utilities.mjs";
+
 export default class ExerciseData {
     constructor() {
-
-    }
-    // Store API options data
-    getOptions() {
-        const options = {
+        this.options = {
             method: 'GET',
             headers: {
                 'x-rapidapi-key': '6797faa94emshf02bb3d46934713p1aff6fjsn8a6b4028de73',
@@ -12,47 +10,67 @@ export default class ExerciseData {
                 'Content-Type': 'application/json'
             }
         }
-        return options;
+
     }
 
-    // Returns API promise
-    async getData(url) {
-        const options = this.getOptions();
-
-        try {
-            const response = await fetch(url, options);
-            const result = await response.json();
-            console.log(result);
-            return result;
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
+    // Returns search results by keyword as a promise
     getExerciseData(keyword) {
         const url = `https://edb-with-videos-and-images-by-ascendapi.p.rapidapi.com/api/v1/exercises/search?search=${keyword}`;
-        return this.getData(url);
+        return getData(url, this.options);
     }
 
+    // Returns individual exercise data as a promise
     getExerciseById(exerciseId) {
         const url = `https://edb-with-videos-and-images-by-ascendapi.p.rapidapi.com/api/v1/exercises/${exerciseId}`;
-        return this.getData(url);
+        return getData(url, this.options);
     }
 
-    // Display single meals in a modal that can be closed with a button
-    // Need to figure out how to get this to display the individual meal data
+    // Returns a random exercise from an array of all exercises
+    async getRandomExercise() {
+        const url = "https://edb-with-videos-and-images-by-ascendapi.p.rapidapi.com/api/v1/exercises";
+        const response = await getData(url, this.options);
+        const exercises = response.data || response;
+        const randomExercise = exercises[Math.floor(Math.random() * exercises.length)];
+        console.log(`Random Exercise: ${randomExercise}`);
+        return randomExercise;
+    }
+
+    // Display single exercises in a modal that can be closed with a button
     exerciseTemplate(exercise) {
         console.log('Exercise data received:', exercise);
 
         const exerciseDetails = document.querySelector("#exercise-details");
+        const instructions = (exercise.instructions || []).map(instruction => `<li>${instruction}</li>`).join("");
+        const targetMuscles = (exercise.targetMuscles || []).map(targetMuscle => `<li>${targetMuscle}</li>`).join("");
+        const secondaryMuscles = (exercise.secondaryMuscles || []).map(secondaryMuscle => `<li>${secondaryMuscle}</li>`).join("");
+        const exerciseTips = (exercise.exerciseTips || []).map(exerciseTip => `<li>${exerciseTip}</li>`).join("");
+        const variations = (exercise.variations || []).map(variation => `<li>${variation}</li>`).join("");
         exerciseDetails.innerHTML = `
-        <img src="${exercise.imageUrl}" alt="${exercise.name}">
-        <h2>${exercise.name.toUpperCase()}</h2>
+        <iframe src="${exercise.videoUrl}">
+        </iframe>
+        <h2>${exercise.name}</h2>
         <h3>Overview</h3>
             <p>${exercise.overview}</p>
         <h3>Instructions</h3>
-            <p>${exercise.instructions}</p>
-            <a href="${exercise.videoUrl}">Video Link</a>
+        <ol>
+            ${instructions}
+        </ol>
+        <h3>Target Muscles</h3>
+        <ul>
+            ${targetMuscles}
+        </ul>
+        <h3>Target Muscles</h3>
+        <ul>
+            ${secondaryMuscles}
+        </ul>
+        <h3>Exercise Tips</h3>
+        <ul>
+            ${exerciseTips}
+        </ul>
+        <h3>Variations</h3>
+        <ol>
+            ${variations}
+        </ol>
         <button id="close-modal" type="button">Close</button>
         <button id="add-fav" type="button">Add Favorite</button>
         `;
@@ -63,6 +81,7 @@ export default class ExerciseData {
         closeModal.addEventListener("click", () => {
             exerciseDetails.close();
         });
+
     }
 
     // Displays exercises (from search results) as cards
@@ -87,12 +106,13 @@ export default class ExerciseData {
             card.appendChild(name);
 
             // Displays modal with exercise details when card is clicked
-            card.addEventListener("click", () => {
-                this.exerciseTemplate(exercise);
+            card.addEventListener("click", async () => {
+                const currentExercise = await this.getExerciseById(exercise.exerciseId);
+                this.exerciseTemplate(currentExercise.data);
             });
 
             exerciseCards.appendChild(card);
         })
     }
-    
-    }
+
+}

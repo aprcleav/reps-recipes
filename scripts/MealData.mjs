@@ -1,10 +1,8 @@
+import { getData } from "./utilities.mjs";
+
 export default class MealData {
     constructor() {
-
-    }
-    // Store API options data
-    getOptions() {
-        const options = {
+        this.options = {
             method: 'GET',
             headers: {
                 'x-rapidapi-key': '6797faa94emshf02bb3d46934713p1aff6fjsn8a6b4028de73',
@@ -12,27 +10,14 @@ export default class MealData {
                 'Content-Type': 'application/json'
             }
         }
-        return options;
+
     }
 
-    // Returns API promise
-    async getData(url) {
-        const options = this.getOptions();
-
-        try {
-            const response = await fetch(url, options);
-            const result = await response.json();
-            console.log(result);
-            return result;
-        } catch (error) {
-            console.error(error);
-        }
-    }
 
     // Move these functions to utilities and make them work for both APIs?
     getMealData(keyword) {
         const url = `https://themealdb.p.rapidapi.com/search.php?s=${keyword}`;
-        return this.getData(url);
+        return getData(url, this.options);
     }
 
     // getMealById(id) {
@@ -42,7 +27,7 @@ export default class MealData {
 
     getRandomMeal() {
         const url = 'https://themealdb.p.rapidapi.com/random.php';
-        return this.getData(url);
+        return getData(url, this.options);
 
     }
 
