@@ -20,8 +20,10 @@ async function runSearch() {
     if (keyword) {
         try {
             const searchResult = await exercises.getExerciseData(keyword);
-            if (searchResult && searchResult.data) {
-                exercises.displayExercises(searchResult.data);
+            // Filter results to only those that include the keyword in the exercise name
+            const filteredResults = searchResult.data.filter(result => result.name.toLowerCase().includes(keyword.toLowerCase()));
+            if (filteredResults.length > 0) {
+                exercises.displayExercises(filteredResults);
             } else {
                 const exerciseCards = document.querySelector("#exercise-cards");
                 exerciseCards.innerHTML = "<p>No exercises found. Please try a different search.</p>"

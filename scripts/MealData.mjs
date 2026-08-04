@@ -1,4 +1,5 @@
-import { getData } from "./utilities.mjs";
+import { getData, getLocalStorage, setLocalStorage } from "./utilities.mjs";
+
 
 export default class MealData {
     constructor() {
@@ -67,6 +68,19 @@ export default class MealData {
         <button id="add-fav" type="button">Add Favorite</button>
         `;
 
+        // Add meal to localStorage when "Add Favorite" button is clicked
+        const addFav = document.getElementById("add-fav");
+        addFav.addEventListener("click", () => {
+            const favItems = getLocalStorage("favs") || [];
+            favItems.push({
+                "name": meal.strMeal,
+                "id": meal.idMeal,
+                "details": meal.strSource
+            });
+            
+            setLocalStorage("favs", favItems);
+        }); 
+
         mealDetails.showModal();
 
         const closeModal = mealDetails.querySelector("#close-modal");
@@ -80,30 +94,35 @@ export default class MealData {
         const mealCards = document.querySelector("#meal-cards");
         mealCards.innerHTML = "";
         meals.forEach((meal) => {
-            let card = document.createElement("div");
-            let imgContainer = document.createElement("div");
-            let img = document.createElement("img");
-            let name = document.createElement("h2");
+            // Only returns healthy meals, not desserts.
+            if (meal.strCategory !== "Dessert") {
+                let card = document.createElement("div");
+                let imgContainer = document.createElement("div");
+                let img = document.createElement("img");
+                let name = document.createElement("h2");
 
-            card.setAttribute("class", "card");
-            name.textContent = meal.strMeal;
-            imgContainer.setAttribute("class", "img-container");
-            img.setAttribute("src", `${meal.strMealThumb}/medium`);
-            img.setAttribute("alt", meal.strMeal);
-            img.setAttribute("width", "300");
-            // img.setAttribute("height", "300");
-            img.setAttribute("loading", "lazy");
+                card.setAttribute("class", "card");
+                name.textContent = meal.strMeal;
+                imgContainer.setAttribute("class", "img-container");
+                img.setAttribute("src", `${meal.strMealThumb}/medium`);
+                img.setAttribute("alt", meal.strMeal);
+                img.setAttribute("width", "300");
+                img.setAttribute("loading", "lazy");
 
-            card.appendChild(imgContainer);
-            imgContainer.appendChild(img);
-            card.appendChild(name);
+                card.appendChild(imgContainer);
+                imgContainer.appendChild(img);
+                card.appendChild(name);
 
-            // Displays modal with recipe when card is clicked
-            card.addEventListener("click", () => {
-                this.mealTemplate(meal);
-            });
+                // Displays modal with recipe when card is clicked
+                card.addEventListener("click", () => {
+                    this.mealTemplate(meal);
+                });
 
-            mealCards.appendChild(card);
+                mealCards.appendChild(card);
+            } else {
+                mealCards.innerHTML = "No meals found. Please try another search."
+            }
+            
         })
     }
 }

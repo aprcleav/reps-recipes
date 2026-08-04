@@ -39,10 +39,6 @@
         margin: auto;
         border: none;
         border-radius: 10px;
-
-        & img {
-            width: 50%;
-        }
     }
 }
 

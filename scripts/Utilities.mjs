@@ -25,10 +25,10 @@ export async function loadHeaderFooter() {
 
     nav.innerHTML = `
     <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="recipes.html">Recipes</a></li>
-        <li><a href="exercises.html">Exercises</a></li>
-        <li><a href="favorites.html">Favorites</a></li>
+        <li><a href="index.html" id="home">Home</a></li>
+        <li><a href="recipes.html" id="recipes">Recipes</a></li>
+        <li><a href="exercises.html" id="exercises">Exercises</a></li>
+        <li><a href="favorites.html" id="favs">Favorites</a></li>
     </ul>`
 
     // Insert nav after header element
@@ -68,5 +68,6 @@ export function getLocalStorage(key) {
 export function setLocalStorage(key, data) {
     localStorage.setItem(key, JSON.stringify(data));
 }
+
 
 

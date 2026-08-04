@@ -1,4 +1,4 @@
-import { getData } from "./utilities.mjs";
+import { getData, getLocalStorage, setLocalStorage } from "./utilities.mjs";
 
 export default class ExerciseData {
     constructor() {
@@ -46,7 +46,7 @@ export default class ExerciseData {
         const exerciseTips = (exercise.exerciseTips || []).map(exerciseTip => `<li>${exerciseTip}</li>`).join("");
         const variations = (exercise.variations || []).map(variation => `<li>${variation}</li>`).join("");
         exerciseDetails.innerHTML = `
-        <iframe src="${exercise.videoUrl}">
+        <iframe src="${exercise.videoUrl}" allow="autoplay">
         </iframe>
         <h2>${exercise.name}</h2>
         <h3>Overview</h3>
@@ -59,7 +59,7 @@ export default class ExerciseData {
         <ul>
             ${targetMuscles}
         </ul>
-        <h3>Target Muscles</h3>
+        <h3>Secondary Muscles</h3>
         <ul>
             ${secondaryMuscles}
         </ul>
@@ -74,6 +74,21 @@ export default class ExerciseData {
         <button id="close-modal" type="button">Close</button>
         <button id="add-fav" type="button">Add Favorite</button>
         `;
+
+        // Add meal to localStorage when "Add Favorite" button is clicked
+        const addFav = document.getElementById("add-fav");
+        addFav.addEventListener("click", () => {
+            const favItems = getLocalStorage("favs") || [];
+            favItems.push({
+                "name": exercise.name,
+                "id": exercise.exerciseId,
+                "details": exercise.overview
+            }
+                
+            );
+            
+            setLocalStorage("favs", favItems);
+        }); 
 
         exerciseDetails.showModal();
 
