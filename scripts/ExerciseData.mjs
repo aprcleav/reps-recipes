@@ -73,21 +73,32 @@ export default class ExerciseData {
         </ol>
         <button id="close-modal" type="button">Close</button>
         <button id="add-fav" type="button">Add Favorite</button>
+        <span id="message"><span>
         `;
 
         // Add meal to localStorage when "Add Favorite" button is clicked
         const addFav = document.getElementById("add-fav");
+        const message = document.getElementById("message");
         addFav.addEventListener("click", () => {
             const favItems = getLocalStorage("favs") || [];
-            favItems.push({
-                "name": exercise.name,
-                "id": exercise.exerciseId,
-                "details": exercise.overview
+            const itemExists = favItems.find((favItem) => favItem.id === exercise.exerciseId);
+            // Only save to favorites if the item doesn't already exist in localStorage
+            if (!itemExists) {
+                favItems.push({
+                    "name": exercise.name,
+                    "id": exercise.exerciseId,
+                    "details": exercise.overview,
+                    "img": exercise.imageUrl
+                });
+
+                setLocalStorage("favs", favItems);
+
+                // Display confirmation message when meal is added to favorites
+                message.innerHTML = "Your exercise was added to favorites!"
+            } else {
+                // Display a different message if item is already in favorites
+                message.innerHTML = "That exercise is already in your favorites.";
             }
-                
-            );
-            
-            setLocalStorage("favs", favItems);
         }); 
 
         exerciseDetails.showModal();

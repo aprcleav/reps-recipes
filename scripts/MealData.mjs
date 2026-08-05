@@ -21,10 +21,10 @@ export default class MealData {
         return getData(url, this.options);
     }
 
-    // getMealById(id) {
-    //     const url = `https://themealdb.p.rapidapi.com/lookup.php?i=${id}`;
-    //     return this.getData(url);
-    // }
+    getMealById(id) {
+        const url = `https://themealdb.p.rapidapi.com/lookup.php?i=${id}`;
+        return getData(url, this.options);
+    }
 
     getRandomMeal() {
         const url = 'https://themealdb.p.rapidapi.com/random.php';
@@ -66,20 +66,32 @@ export default class MealData {
         <p><a href="${meal.strSource}">Source</a></p>
         <button id="close-modal" type="button">Close</button>
         <button id="add-fav" type="button">Add Favorite</button>
+        <span id="message"><span>
         `;
 
         // Add meal to localStorage when "Add Favorite" button is clicked
         const addFav = document.getElementById("add-fav");
+        const message = document.getElementById("message");
         addFav.addEventListener("click", () => {
             const favItems = getLocalStorage("favs") || [];
-            favItems.push({
-                "name": meal.strMeal,
-                "id": meal.idMeal,
-                "details": meal.strSource
-            });
-            
-            setLocalStorage("favs", favItems);
-        }); 
+            const itemExists = favItems.find((favItem) => favItem.id === meal.idMeal);
+            // Only save to favorites if the item doesn't already exist in localStorage
+            if (!itemExists) {
+                favItems.push({
+                    "name": meal.strMeal,
+                    "id": meal.idMeal,
+                    "details": meal.strSource,
+                    "img": meal.strMealThumb
+                });
+
+                setLocalStorage("favs", favItems);
+                // Display confirmation message when meal is added to favorites
+                message.innerHTML = "Your meal was added to favorites!"
+            } else {
+                // Display a different message if item is already in favorites
+                message.innerHTML = "That meal is already in your favorites.";
+            }
+        });  
 
         mealDetails.showModal();
 
