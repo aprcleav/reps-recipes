@@ -46,6 +46,17 @@ export async function loadHeaderFooter() {
     const today = new Date();
     year.innerHTML = today.getFullYear();
     document.getElementById("last-modified").innerHTML = document.lastModified;
+
+    // // Highlights the active page in the nav bar for wayfinding
+    // const currentPage = window.location.pathname.split("/").pop() || "index.html";
+
+    // document.querySelectorAll("#nav-bar a").forEach(link => {
+    //     const href = link.getAttribute("href");
+    //     if (href === currentPage) {
+    //         link.classList.add("active");
+    //         link.setAttribute("aria-current", "page");
+    //     }
+    // })
 }
 
 // Fetch API data

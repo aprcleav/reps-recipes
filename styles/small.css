@@ -124,7 +124,10 @@ header {
 }
 
 .active {
-    background-color:#ebd2ac;
+    background-color:#faefde;
+    border-bottom: 4px solid var(--secondary-color);
+    border-top: 4px solid var(--accent-color);
+    box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.3);
 }
 
 .navigation.show {
