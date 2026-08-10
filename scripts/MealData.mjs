@@ -39,6 +39,8 @@ export default class MealData {
         <h2>${meal.strMeal.toUpperCase()}</h2>
         <h3>Category</h3>
         <p>${meal.strCategory}</p>
+        <h3>Country</h3>
+        <p>${meal.strCountry}</p> 
         <h3>Ingredients</h3>
             <p>${meal.strMeasure1} ${meal.strIngredient1}</p>
             <p>${meal.strMeasure2} ${meal.strIngredient2}</p>
