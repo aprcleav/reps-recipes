@@ -29,17 +29,16 @@ export default class MealData {
     getRandomMeal() {
         const url = 'https://themealdb.p.rapidapi.com/random.php';
         return getData(url, this.options);
-
     }
 
     // Display single meals in a modal that can be closed with a button
     mealTemplate(meal) {
-        console.log('Meal data received:', meal);
-
         const mealDetails = document.querySelector("#meal-details");
         mealDetails.innerHTML = `
-        <img src="${meal.strMealThumb}/medium" alt="${meal.strMeal}">
+        <img src="${meal.strMealThumb}/small" alt="${meal.strMeal}" loading="lazy">
         <h2>${meal.strMeal.toUpperCase()}</h2>
+        <h3>Category</h3>
+        <p>${meal.strCategory}</p>
         <h3>Ingredients</h3>
             <p>${meal.strMeasure1} ${meal.strIngredient1}</p>
             <p>${meal.strMeasure2} ${meal.strIngredient2}</p>
@@ -118,7 +117,7 @@ export default class MealData {
                 imgContainer.setAttribute("class", "img-container");
                 img.setAttribute("src", `${meal.strMealThumb}/medium`);
                 img.setAttribute("alt", meal.strMeal);
-                img.setAttribute("width", "300");
+                // img.setAttribute("width", "300");
                 img.setAttribute("loading", "lazy");
 
                 card.appendChild(imgContainer);

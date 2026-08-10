@@ -9,7 +9,10 @@ export default class ExerciseData {
                 'x-rapidapi-host': 'edb-with-videos-and-images-by-ascendapi.p.rapidapi.com',
                 'Content-Type': 'application/json'
             }
-        }
+        };
+
+        this.allExercises = [];
+        this.usedExerciseIds = new Set();
 
     }
 
@@ -27,18 +30,31 @@ export default class ExerciseData {
 
     // Returns a random exercise from an array of all exercises
     async getRandomExercise() {
-        const url = "https://edb-with-videos-and-images-by-ascendapi.p.rapidapi.com/api/v1/exercises";
-        const response = await getData(url, this.options);
-        const exercises = response.data || response;
-        const randomExercise = exercises[Math.floor(Math.random() * exercises.length)];
-        console.log(`Random Exercise: ${randomExercise}`);
+        if (this.allExercises.length === 0) {
+            const url = "https://edb-with-videos-and-images-by-ascendapi.p.rapidapi.com/api/v1/exercises";
+            const response = await getData(url, this.options);
+            this.allExercises = response.data || response;
+        }
+
+        // Available exercises are only returned if their Id has not been used before (stored in the usedExerciseIds array) to prevent getting the same random exercise multiple times in a row
+        let availableExercises = this.allExercises.filter((exercise) => !this.usedExerciseIds.has(exercise.exerciseId));
+
+        // Set available exercises to all exercises if the available exercises array is empty
+        if (availableExercises.length === 0) {
+            this.usedExerciseIds.clear();
+            availableExercises = this.allExercises;
+        }
+
+        // Choose a random exercise from the available exercises array
+        const randomExercise = availableExercises[Math.floor(Math.random() * availableExercises.length)];
+
+        // Adds the random exercise id to the used exercise array
+        this.usedExerciseIds.add(randomExercise.exerciseId);
         return randomExercise;
     }
 
     // Display single exercises in a modal that can be closed with a button
     exerciseTemplate(exercise) {
-        console.log('Exercise data received:', exercise);
-
         const exerciseDetails = document.querySelector("#exercise-details");
         const instructions = (exercise.instructions || []).map(instruction => `<li>${instruction}</li>`).join("");
         const targetMuscles = (exercise.targetMuscles || []).map(targetMuscle => `<li>${targetMuscle}</li>`).join("");

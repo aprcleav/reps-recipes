@@ -26,7 +26,7 @@ export default class FavsData {
                 imgContainer.setAttribute("class", "img-container");
                 img.setAttribute("src", fav.img);
                 img.setAttribute("alt", fav.name);
-                img.setAttribute("width", "200");
+                // img.setAttribute("width", "200");
                 img.setAttribute("loading", "lazy");
                 removeButton.setAttribute("id", "remove-button");
                 removeButton.textContent = "Remove";
@@ -40,14 +40,12 @@ export default class FavsData {
                 imgContainer.addEventListener("click", async () => {
                     if (fav.id.includes("exr")) {
                         const exercise = await exercises.getExerciseById(fav.id);
-                        console.log(exercise);
                         exercises.exerciseTemplate(exercise.data);
                     } else {
                         const meal = await meals.getMealById(fav.id);
                         meals.mealTemplate(meal.meals[0]);
                     }
                 });
-                // console.log('Value of fav:', fav, 'Type:', typeof fav);
 
                 removeButton.addEventListener("click", () => {
                     this.removeFav(fav.id);

@@ -39,15 +39,16 @@ header {
     border-bottom: solid 4px var(--accent-color);
     color: var(--accent2-color);
     text-transform:uppercase;
-    & img {
-            width: 70px;
-            height: 100%;
-        }
-    & a {
-        text-decoration: none;
-        color: var(--accent2-color);
-    }
+}
 
+header img {
+    width: 70px;
+    height: 100%;
+}
+
+header a {
+    text-decoration: none;
+    color: var(--accent2-color);
 }
 
 /* Hamburger navigation */
@@ -61,20 +62,13 @@ header {
     }
 }
 
-/* @keyframes slideUp {
-    from {
-        height: 100px;
-    }
-    to {
-        height: 0px;
-    }
-} */
-
 .hamburger {
-    background: none;
+    background: var(--primary-color);
     border: none;
     cursor: pointer;
+    color: var(--accent2-color)
 }
+
 .hamburger:hover {
     background-color: var(--primary-color);
 }
@@ -103,24 +97,24 @@ header {
     padding: 10px;
     border-bottom: 4px solid var(--secondary-color);
     box-shadow: 0px 8px 5px -5px rgba(0, 0, 0, 0.3);
+}
 
-    & a {
-        text-decoration: none;
-        color: var(--primary-color);
-    }
+.navigation a {
+    text-decoration: none;
+    color: var(--primary-color);
+}
 
-    & a:hover {
-        color: #8b580b;
-    }
+.navigation a:hover {
+    color: #8b580b;
+}
 
-    & li {
-        list-style: none;
-        padding: 2px;
-    }
+.navigation li {
+    list-style: none;
+    padding: 2px;
+}
 
-    & ul {
-        padding: 0;
-    }
+.navigation ul {
+    padding: 0;
 }
 
 .active {
@@ -128,6 +122,7 @@ header {
     border-bottom: 4px solid var(--secondary-color);
     border-top: 4px solid var(--accent-color);
     box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.3);
+    color: var(--primary-color);
 }
 
 .navigation.show {
@@ -147,9 +142,9 @@ main {
     display: grid;
     place-items: center;
     padding:20px 20px 0 20px;
-    & p {
-        text-align: center;
-    }
+}
+#search-box p {
+    text-align: center;
 }
 
 .search {
@@ -157,19 +152,18 @@ main {
     grid-gap: .3rem;
     grid-template-columns: 30px 1fr 20px;
     place-items: center;
-    
-    & input[type="search"] {
-        margin: 5px;
-        width: 150px;
-        font-family: "Montserrat", Arial, sans-serif;
-        padding: 5px;
-    }
-
 }
+    
+.search input[type="search"] {
+    margin: 5px;
+    width: 150px;
+    font-family: "Montserrat", Arial, sans-serif;
+    padding: 5px;
+}
+
 .random {
     text-align: center;
     grid-column: 2/3;
-    
 }
 
 .icon {
@@ -210,9 +204,10 @@ button:hover, .button:hover, #remove-button:hover {
 
 #fav-cards .card {
     cursor: default;
-    & .img-container {
-        cursor: pointer;
-    }
+}
+
+#fav-cards .card .img-container {
+    cursor: pointer;
 }
 
 .card {
@@ -223,9 +218,10 @@ button:hover, .button:hover, #remove-button:hover {
     cursor: pointer;
     background-color: var(--primary-color);
     color: var(--accent2-color);
-    & h2 {
-        text-transform: capitalize;
-    }
+}
+
+.card h2 {
+    text-transform: capitalize;
 }
 
 .placeholder-img {
@@ -239,12 +235,12 @@ button:hover, .button:hover, #remove-button:hover {
     height: 250px;
     overflow: hidden;
     border-radius: 10px 10px 0 0;
-    & img {
-        width: 100%;
-        height: 100%;
-        object-fit:cover;
-        transition: transform 0.3s ease;
-    }
+}
+.img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+    transition: transform 0.3s ease;
 }
 
 .img-container:hover img {
@@ -252,10 +248,9 @@ button:hover, .button:hover, #remove-button:hover {
 }
 
 #remove-button {
-    background-color: none;
+    background-color: var(--primary-color);
     color: var(--accent2-color);
 }
-
 
 /* Dialog box styles */
 
@@ -270,27 +265,29 @@ button:hover, .button:hover, #remove-button:hover {
     border-radius: 10px;
     background-color: var(--accent2-color);
     color: var(--primary-color);
-    & img {
-            max-width: 100%;
-        }
+}
+
+#meal-details img, #exercise-details img {
+    max-width: 100%;
+    height: 100%;
 }
 
 iframe {
     border: none;
 }
 
-
 /* Index page styles */
 .welcome {
     text-align: center;
     margin: 30px;
-    & p {
-        padding: 5px;
-    }
-    & img {
-        max-width: 100%;
-    }
 }
+.welcome p {
+    padding: 5px;
+}
+.welcome img {
+    max-width: 100%;
+}
+
 .button {
     text-decoration: none;
     justify-content: center;
@@ -301,12 +298,13 @@ iframe {
     flex-wrap: wrap;
     justify-content:center;
 }
+
 /* Attribution page styles */
 .att {
     font-weight: 600;
-    & li a {
-        list-style:disc;
-    }
+}
+.att li a {
+    list-style:disc;
 }
 
 /* Favorites page styles */
@@ -320,12 +318,14 @@ footer {
     color: var(--accent2-color);
     padding: 20px;
     text-align: center;
-    & a {
-        text-decoration: none;
-        color: var(--accent2-color);
+}
+
+footer a {
+    text-decoration: none;
+    color: var(--accent2-color);
     }
-    & a:hover {
-        color: #ebd2ac;
-    }
+
+footer a:hover {
+    color: #ebd2ac;
 }
 

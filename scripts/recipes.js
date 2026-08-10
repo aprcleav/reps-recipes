@@ -2,11 +2,16 @@ import MealData from "./MealData.mjs";
 
 const meals = new MealData();
 
-// Display random recipe when "get random" button is clicked
+// Display random recipe that is not a dessert when "get random" button is clicked. Not a perfect solution, but seems to be working well enough.
 const randomButton = document.querySelector(".random");
 randomButton.addEventListener("click", async () => {
-    const randomMeal = await meals.getRandomMeal();
-    meals.mealTemplate(randomMeal.meals[0]);
+    let randomMeal = await meals.getRandomMeal();
+    if (randomMeal.meals[0].strCategory !== "Dessert") {
+        meals.mealTemplate(randomMeal.meals[0]);
+    } else {
+        randomMeal = await meals.getRandomMeal();
+        meals.mealTemplate(randomMeal.meals[0]);
+    }
 });
 
 

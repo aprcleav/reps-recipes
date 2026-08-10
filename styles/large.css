@@ -1,10 +1,10 @@
 @media only screen and (min-width: 600px) {
     header {
         justify-content: center;
-        & img {
-            margin-right: 10px;
-        }
+    }
 
+    header img {
+        margin-right: 10px;
     }
     
     .hamburger {
@@ -19,9 +19,9 @@
     .navigation ul {
         display: flex;
         justify-content: center;
-        & li a {
-            padding: 15px;
-        }
+    }
+    .navigation ul li a {
+        padding: 15px;
     }
 
     .search {
